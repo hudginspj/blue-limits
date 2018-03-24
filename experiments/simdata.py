@@ -9,16 +9,34 @@ import pandas as pd
 from math import cos,sin,pi,sqrt
 from scipy.stats import norm
 
+counter = 0
 
-def nextPoint(self, parameter_list):
-    pass
-Fs=8000
-f=500
-sample=16
-a=[0]*sample
-for n in range(sample):
-    a[n]=sin(2*pi*f*n/Fs)
+def nextPoint():
+    global counter
+    counter += 1
+    time = float(counter)
+    mode = rndm.randrange(5)
+    angle = 2.0 *  pi * (counter % 100) / 100.0
+    temp = tempf(angle)
+    point = (time, {"mode": mode, "orbitAngle": angle, "temp": temp})
+    return point
 
+def tempf(angle):
+    return (sin(angle)/2) + sin(angle)
+
+if __name__ == "__main__":
+    print(nextPoint())
+
+
+# def accel_period():
+
+# def other_period():
+
+# def normiedata():
+#     x = np.linspace(0, 1000, 100)
+#     y = (2*x) + 2 + 20*np.random.randn(100)
+#     data = np.hstack((x.reshape(100,1), y.reshape(100,1)))
+#     return
 
 
 
