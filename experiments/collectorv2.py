@@ -18,15 +18,14 @@ class Collector(object):
 
     def nextXWindow(self):
         if self.counter >= WINDOW_SIZE + 1:
-            l = [point[1]['mode'], point[1]['orbitAngle'], point[1]['temp']]
+            l = []
             for i in range(WINDOW_SIZE):
                 point = xSimData.nextPoint()
                 l.append(point[1]['mode'])
                 l.append(point[1]['orbitAngle'])
                 l.append(point[1]['temp'])
-            array = np.array(l)
 
-            return array
+            return l
         else:
             return None
 
