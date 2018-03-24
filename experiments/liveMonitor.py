@@ -35,7 +35,7 @@ class LiveMonitor(object):
         else:
             anomalyKey = self.detectAnomalyKey(point, pointPredictions, pointRanges)
             if anomalyKey:
-                self.plotRange(50, anomalyKey)
+                self.plotRange(50, anomalyKey, True)
 
 
 
@@ -54,7 +54,7 @@ class LiveMonitor(object):
 
 
 
-    def plotRange(self, num_points, variable):
+    def plotRange(self, num_points, variable, anomaly=False):
         times = [p[0] for p in self.points[-num_points:]]
         reals = [p[1][variable] for p in self.points[-num_points:]]
         preds = self.predictionsDict[variable][-num_points:]
@@ -64,7 +64,7 @@ class LiveMonitor(object):
         print("reals", reals)
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
-        xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds)
+        xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
         # print("times", times)
 
         #TODO plot(times, reals, preds, lower_bounds, upper_bounds)
