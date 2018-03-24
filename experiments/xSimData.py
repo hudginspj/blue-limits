@@ -4,6 +4,7 @@ import math
 counter = 0
 
 def nextPoint():
+    global counter
     counter += 1
     time = float(counter)
     mode = random.randrange(5)
@@ -11,3 +12,7 @@ def nextPoint():
     temp = math.sin(orbitAngle)
     point = (time, {"mode": mode, "orbitAngle": orbitAngle, "temp": temp})
     return point
+
+
+if __name__ == "__main__":
+    print(nextPoint())
