@@ -10,10 +10,10 @@ try:
     fig = plt.figure()
     clr = fig.add_subplot(1,1,1)
 
-    def graph(timestamps, realValues, predictedValues, b1, b2, anomaly=False, lm1=1.6, lm2=-1.6):
+    def graph(timestamps, realValues, predictedValues, b1, b2, anomaly=False):
         cnter = 1
-        plt.plot(timestamps,, 'gold')
-        plt.plot(timestamps,lm2[0], 'darkorange')
+        # plt.plot(timestamps,, 'gold')
+        # plt.plot(timestamps,lm2[0], 'darkorange')
         plt.plot(timestamps, realValues, 'b')
         plt.plot(timestamps, b1, 'darkblue')
         plt.plot(timestamps, b2, 'darkred')
