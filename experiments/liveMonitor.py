@@ -42,7 +42,7 @@ class LiveMonitor(object):
     def detectAnomalyKey(self, point, pointPredictions): #returns key of anomaly if exists
         if self.counter > 0 and (self.counter % 50) == 0:
             return 'temp'
-        else
+        else:
             return None
 
 
@@ -58,7 +58,7 @@ class LiveMonitor(object):
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
         xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds)
-        print("times", times)
+        # print("times", times)
 
         #TODO plot(times, reals, preds, lower_bounds, upper_bounds)
 

@@ -66,7 +66,7 @@ try:
             pointRanges = col.outputsToDict(ranger.calcRanges(window))
             monitor.handleNext(point, pointPredictions, pointRanges)
 except Exception as e:
-    pass
+    print(e)
 
 
 # NUM_test_POINTS = 100
