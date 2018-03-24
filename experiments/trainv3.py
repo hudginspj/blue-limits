@@ -65,6 +65,7 @@ while True:
         pointRanges = col.outputsToDict(ranger.calcRanges(window))
         monitor.handleNext(point, pointPredictions, pointRanges)
 
+
 # NUM_test_POINTS = 100
 # testing_points = []  # structures
 # testing_windows = []  # numpy arrays

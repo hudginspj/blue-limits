@@ -1,6 +1,8 @@
 
 import sklearn
+
 from sklearn.ensemble import RandomForestRegressor
+from sklearn import svm
 import numpy
 
 
@@ -32,7 +34,8 @@ class Regressor(object):
         # assert xWindows[0].__len__() >= 1
 
     def makeRegressor(self):
-        r = RandomForestRegressor()
+        r = svm.SVR(gamma=0.0001, C= 100)
+        # r = RandomForestRegressor()
         return r
 
 
