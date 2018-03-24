@@ -5,19 +5,19 @@ import numpy
 
 
 
-class Regressor(object):
+class Ranger(object):
     # The class "constructor" - It's actually an initializer 
     def __init__(self, num_outputs):
         self.num_outputs = num_outputs
         self.regressors = []
         for i in range(num_outputs):
-            self.regressors.append(self.makeRegressor())
+            self.regressors.append(RandomForestRegressor())
 
-    def predict(self, xWindow):
+    def calcRanges(self, xWindow):
         yOutputs = []
         for i_out in range(self.num_outputs):
-            prediction = self.regressors[i_out].predict(numpy.array([xWindow]))
-            yOutputs.append(prediction[0])
+            # prediction = self.regressors[i_out].predict(xWindow)
+            yOutputs.append(0.5)
         return yOutputs
 
     def train(self, xWindows, yOutputs):
@@ -28,17 +28,14 @@ class Regressor(object):
                 ys.append(yOutputs[i][i_out])
             yArr = numpy.array(ys)
             self.regressors[i_out].fit(xWindowArr, yArr)
-        # assert yOutputs[0].__len__() >= 1
-        # assert xWindows[0].__len__() >= 1
+        
 
-    def makeRegressor(self):
-        r = RandomForestRegressor()
-        return r
+if __name__ == "__main__":
+    print(nextPoint())
 
 
 
 
-# # clf = sklearn.svm.SVR(gamma=0.001, C=100.)
-# clf = RandomForestRegressor()
-# clf.fit(windows, target)
+
+
 
