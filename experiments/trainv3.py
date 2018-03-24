@@ -10,6 +10,7 @@ import rangeCalc
 import liveMonitor
 import time
 import simAnomaly2
+import cosmosServer
 
 
 ####################### Train for predictions ####################
@@ -59,8 +60,9 @@ try:
     while True:
         time.sleep(0.1)
         point = simData.nextPoint()
-
         simAnomaly2.addAnomaly(point)
+        
+        cosmosServer.nextPoint = point
         collector.addPoint(point)
         window = collector.nextXWindow()
         if window:
