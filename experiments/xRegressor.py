@@ -7,17 +7,30 @@ import numpy
 
 class Regressor(object):
     # The class "constructor" - It's actually an initializer 
-    def __init__(self):
+    def __init__(self, num_outputs):
+        self.num_outputs = num_outputs
+        self.regressors = []
+        for i in range(num_outputs):
+            self.regressors.append(self.makeRegressor())
 
     def predict(self, xWindows):
         assert xWindows[0].__len__() >= 1
         return [1.0, -5.0]
 
     def train(self, xWindows, yOutputs):
-        assert yOutputs[0].__len__() >= 1
-        assert xWindows[0].__len__() >= 1
+        xWindowArr = numpy.array(xWindows)
+        for i_out in range(num_outputs):
+            ys = []
+            for i in range(yOutputs.__len__()):
+                ys.append(yOutputs[i][out])
+            yWindowArr = numpy.array(ys)
+            regressors[i_out].fit(xWindows, ys)]
+        # assert yOutputs[0].__len__() >= 1
+        # assert xWindows[0].__len__() >= 1
 
-
+    def makeRegressor(self):
+        r = RandomForestRegressor()
+        return r
 
     def addPoint(self, point):
         self.points.append(point)
