@@ -20,7 +20,8 @@ class Collector(object):
         if self.counter >= WINDOW_SIZE + 1:
             l = []
             for i in range(WINDOW_SIZE):
-                point = xSimData.nextPoint()
+                point = self.points[self.counter-i-1]
+                print(point)
                 l.append(point[1]['mode'])
                 l.append(point[1]['orbitAngle'])
                 l.append(point[1]['temp'])
@@ -31,7 +32,7 @@ class Collector(object):
 
     def nextYOutputs(self):
         if self.counter >= WINDOW_SIZE + 1:
-            return [self.points[self.counter][0]]
+            return [self.points[self.counter][1]['temp']]
         else:
             return None
 
@@ -40,7 +41,8 @@ class Collector(object):
 if __name__ == "__main__":
     c = Collector()
     for i in range(100):
-        c.addPoint([i])
+        point = xSimData.nextPoint()
+        c.addPoint(point)
     print(c.nextXWindow())
     print(c.nextYOutputs())
 
