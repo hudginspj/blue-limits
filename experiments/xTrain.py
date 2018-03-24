@@ -1,4 +1,5 @@
 import collector
+import xRegresor
 
 NUM_TRAINING_POINTS = 100
 training_points = [] #structures
@@ -15,7 +16,7 @@ for i in range(NUM_TRAINING_POINTS):
         training_windows.append(window)
         training_outputs.append(collector.nextYOutputs)
     
-    regressor = None #TODO
+    regressor = xRegressor.Regressor()
     regressor.train(training_windows, training_outputs)
 
 
