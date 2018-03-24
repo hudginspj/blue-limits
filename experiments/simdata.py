@@ -5,7 +5,7 @@
 import numpy as np 
 import random as rndm 
 import matplotlib.pyplot as plt
-import pandas as dsgnr
+import pandas as pd
 from math import cos,sin,pi,sqrt
 from scipy.stats import norm
 
@@ -141,3 +141,5 @@ for n in range(sample):
 #     out += np.expand_dims(x0, axis=-1)
 
 #     return out
+
+
