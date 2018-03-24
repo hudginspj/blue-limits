@@ -60,6 +60,7 @@ try:
     while True:
         time.sleep(0.1)
         point = simData.nextPoint()
+        
         simAnomaly2.addAnomaly(point)
 
         cosmosServer.nextPoint = point
@@ -74,22 +75,4 @@ except Exception as e:
     raise e
 
 
-# NUM_test_POINTS = 100
-# testing_points = []  # structures
-# testing_windows = []  # numpy arrays
-# testing_outputs = []
-# timestamps=[]
-# real_values=[]
-# predictions = []
 
-# for i in range(NUM_test_POINTS):
-#     point = xSimData.nextPoint()
-#     timestamps.append(point[0])
-#     real_values.append(point[1]["temp"])
-#     collector.addPoint(point)
-#     window = collector.nextXWindow()
-#     if window:
-#         prediction = regressor.predict(window)[0]
-#         predictions.append(prediction)
-#         # test_windows.append(window)
-#         # test_outputs.append(collector.nextYOutputs)

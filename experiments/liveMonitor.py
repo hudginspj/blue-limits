@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import collectorv3 as col
 import xP_plots
 
-PLOT_CONSTANTLY = False
+PLOT_CONSTANTLY = True
 
 class LiveMonitor(object):
     # The class "constructor" - It's actually an initializer 
