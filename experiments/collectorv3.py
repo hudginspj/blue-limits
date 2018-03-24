@@ -8,17 +8,23 @@ def pointToInputs(point):
     return [
         point[1]['mode'],
         point[1]['orbitAngle'],
-        point[1]['temp']
+        point[1]['temp'],
+        point[1]['TEMP2'],
+        point[1]['ACCELX']
     ]
 
 def pointToOutputs(point):
     return [
-        point[1]['temp']
+        point[1]['temp'],
+        point[1]['TEMP2'],
+        point[1]['ACCELX']
     ]
 
 def outputsToDict(outputs):
     return {
-        'temp': outputs[0]
+        'temp': outputs[0],
+        'TEMP2': outputs[1],
+        'ACCELX': outputs[2]
     }
 
 class Collector(object):

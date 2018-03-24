@@ -30,7 +30,7 @@ for i in range(NUM_TRAINING_POINTS):
         training_windows.append(window)
         training_outputs.append(collector.nextYOutputs())
 
-regressor = xRegressor.Regressor(1)
+regressor = xRegressor.Regressor(3)
 regressor.train(training_windows, training_outputs)
 
 ####################### Train for ranges ####################
@@ -48,20 +48,20 @@ for i in range(NUM_TRAINING_POINTS):
         training_windows.append(window)
         training_outputs.append(collector.nextYOutputs())
 
-ranger = rangeCalc.Ranger(1)
+ranger = rangeCalc.Ranger(3)
 ranger.train(training_windows, training_outputs)
 
 
 ########### Run live ####################
 
 print("Running live")
-monitor = liveMonitor.LiveMonitor(1)
+monitor = liveMonitor.LiveMonitor(3)
 try:
     while True:
         time.sleep(0.1)
         point = simData.nextPoint()
         simAnomaly2.addAnomaly(point)
-        
+
         cosmosServer.nextPoint = point
         collector.addPoint(point)
         window = collector.nextXWindow()
@@ -71,6 +71,7 @@ try:
             monitor.handleNext(point, pointPredictions, pointRanges)
 except Exception as e:
     print(e)
+    raise e
 
 
 # NUM_test_POINTS = 100

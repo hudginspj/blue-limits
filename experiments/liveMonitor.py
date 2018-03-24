@@ -22,7 +22,9 @@ class LiveMonitor(object):
             self.rangesDict[k] = []
 
     def handleNext(self, point, pointPredictions, pointRanges):
-        # print("pointPredictions", pointPredictions)
+        print("pointPredictions", pointPredictions)
+        print(point)
+        print(pointRanges)
         self.counter += 1
         self.points.append(point)
         for k in pointPredictions.keys():
