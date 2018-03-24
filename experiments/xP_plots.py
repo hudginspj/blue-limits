@@ -11,7 +11,7 @@ try:
         plt.plot(timestamps, b2, 'xkcd:red')
         plt.plot(timestamps, predictedValues, 'xkcd:green')
         plt.draw()
-        plt.pause(5)
+        plt.pause(5)   
     plt.show()
 except Exception as e:
     pass
