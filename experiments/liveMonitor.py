@@ -42,7 +42,7 @@ class LiveMonitor(object):
         ranges = self.rangesDict[variable][-num_points:]
         print("times", times)
         print("preds ", preds)
-        print("ranges", ranges)
+        print("reals", reals)
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
         xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds)
