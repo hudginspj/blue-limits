@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import collectorv3 as col
 import xP_plots
 
-PLOT_CONSTANTLY = True
+PLOT_CONSTANTLY = False
 
 class LiveMonitor(object):
     # The class "constructor" - It's actually an initializer 
@@ -33,17 +33,24 @@ class LiveMonitor(object):
             if self.counter > 0 and (self.counter % 50) == 0:
                 self.plotRange(50, 'temp')
         else:
-            anomalyKey = self.detectAnomalyKey()
+            anomalyKey = self.detectAnomalyKey(point, pointPredictions, pointRanges)
             if anomalyKey:
                 self.plotRange(50, anomalyKey)
 
 
 
-    def detectAnomalyKey(self, point, pointPredictions): #returns key of anomaly if exists
-        if self.counter > 0 and (self.counter % 50) == 0:
-            return 'temp'
-        else:
-            return None
+
+    def detectAnomalyKey(self, point, pointPredictions, pointRanges): #returns key of anomaly if exists
+        # if self.counter > 0 and (self.counter % 50) == 0:
+        #     return 'temp'
+        for k in pointPredictions.keys():
+            upper = pointPredictions[k] + pointRanges[k]
+            lower = pointPredictions[k] - pointRanges[k]
+            if point[1][k] > upper or point[1][k] < lower:
+                if self.counter % 10 == 0:
+                    return 'temp'
+        return None
+
 
 
 

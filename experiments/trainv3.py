@@ -9,6 +9,7 @@ import xRegressor
 import rangeCalc
 import liveMonitor
 import time
+import simAnomaly2
 
 
 ####################### Train for predictions ####################
@@ -59,6 +60,7 @@ try:
         time.sleep(0.1)
         point = simData.nextPoint()
 
+        simAnomaly2.addAnomaly(point)
         collector.addPoint(point)
         window = collector.nextXWindow()
         if window:
