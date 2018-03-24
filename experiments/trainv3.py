@@ -54,16 +54,19 @@ ranger.train(training_windows, training_outputs)
 
 print("Running live")
 monitor = liveMonitor.LiveMonitor(1)
-while True:
-    time.sleep(0.1)
-    point = simData.nextPoint()
-    
-    collector.addPoint(point)
-    window = collector.nextXWindow()
-    if window:
-        pointPredictions = col.outputsToDict(regressor.predict(window))
-        pointRanges = col.outputsToDict(ranger.calcRanges(window))
-        monitor.handleNext(point, pointPredictions, pointRanges)
+try:
+    while True:
+        time.sleep(0.1)
+        point = simData.nextPoint()
+
+        collector.addPoint(point)
+        window = collector.nextXWindow()
+        if window:
+            pointPredictions = col.outputsToDict(regressor.predict(window))
+            pointRanges = col.outputsToDict(ranger.calcRanges(window))
+            monitor.handleNext(point, pointPredictions, pointRanges)
+except Exception as e:
+    pass
 
 
 # NUM_test_POINTS = 100
