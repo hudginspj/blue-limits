@@ -1,7 +1,9 @@
 import sklearn
 from sklearn.ensemble import RandomForestRegressor
 import numpy
+import matplotlib.pyplot as plt
 import collectorv3 as col
+import xP_plots
 
 PLOT_CONSTANTLY = True
 
@@ -55,11 +57,12 @@ class LiveMonitor(object):
         print("ranges", ranges)
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
+        xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds)
         print("times", times)
-        #TODO graph(times, reals, preds, lower_bounds, upper_bounds)
+
+        #TODO plot(times, reals, preds, lower_bounds, upper_bounds)
 
 
-    
 
     def ranges(self, xWindow):
         ranges = []
