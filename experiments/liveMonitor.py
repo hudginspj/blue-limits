@@ -1,9 +1,11 @@
 import sklearn
 from sklearn.ensemble import RandomForestRegressor
 import numpy
+import matplotlib.pyplot as plt
 import collectorv3 as col
+import xP_plots
 
-
+PLOT_CONSTANTLY = False
 
 class LiveMonitor(object):
     # The class "constructor" - It's actually an initializer 
@@ -27,28 +29,47 @@ class LiveMonitor(object):
             self.predictionsDict[k].append(pointPredictions[k])
             self.rangesDict[k].append(pointRanges[k])
         self.cosmosPlot(point)
-        if self.counter > 0 and (self.counter % 50) == 0:
-            self.plotRange(50, 'temp')
+        if PLOT_CONSTANTLY:
+            if self.counter > 0 and (self.counter % 50) == 0:
+                self.plotRange(50, 'temp')
+        else:
+            anomalyKey = self.detectAnomalyKey(point, pointPredictions, pointRanges)
+            if anomalyKey:
+                self.plotRange(50, anomalyKey, True)
 
 
-        
 
 
-    def plotRange(self, num_points, variable):
+    def detectAnomalyKey(self, point, pointPredictions, pointRanges): #returns key of anomaly if exists
+        # if self.counter > 0 and (self.counter % 50) == 0:
+        #     return 'temp'
+        for k in pointPredictions.keys():
+            upper = pointPredictions[k] + pointRanges[k]
+            lower = pointPredictions[k] - pointRanges[k]
+            if point[1][k] > upper or point[1][k] < lower:
+                if self.counter % 10 == 0:
+                    return 'temp'
+        return None
+
+
+
+
+    def plotRange(self, num_points, variable, anomaly=False):
         times = [p[0] for p in self.points[-num_points:]]
         reals = [p[1][variable] for p in self.points[-num_points:]]
         preds = self.predictionsDict[variable][-num_points:]
         ranges = self.rangesDict[variable][-num_points:]
         print("times", times)
         print("preds ", preds)
-        print("ranges", ranges)
+        print("reals", reals)
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
-        print("times", times)
+        xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
+        # print("times", times)
+
         #TODO plot(times, reals, preds, lower_bounds, upper_bounds)
 
 
-    
 
     def ranges(self, xWindow):
         ranges = []
