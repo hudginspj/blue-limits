@@ -35,7 +35,8 @@ class Regressor(object):
             # assert xWindows[0].__len__() >= 1
 
         def makeRegressor(self):
-            r = sklearn.neighbors.KNeighborsRegressor()
+
+            # r = sklearn.neighbors.KNeighborsRegressor()
             # r = sklearn.neural_network
             # r = svm.SVR(gamma=0.0001, C= 100)
             # r = RandomForestRegressor()
