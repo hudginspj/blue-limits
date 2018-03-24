@@ -11,31 +11,42 @@ class LiveMonitor(object):
         self.num_outputs = num_outputs
         self.counter = -1
         self.points = []
-        self.predictionsDict = [] # Dictionary of lists of predictions
-        self.rangesDict = [] #Dictionary of lists of ranges
-
-    def handleNext(self, point, pointPredictions, pointRanges):
-        self.counter += 1
-        #add to dicts
-        self.cosmosPlot(point)
-        if counter > 0 and (counter % 50):
-            plotRange(50, 'temp')
-
-
-    def emptyOutputDict(self):
+        self.predictionsDict = {} # Dictionary of lists of predictions
+        self.rangesDict = {} #Dictionary of lists of ranges
         emptyPoint = col.outputsToDict([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
         for k in emptyPoint.keys():
-            print("key", k)
+            # print("key", k)
+            self.predictionsDict[k] = []
+            self.rangesDict[k] = []
+
+    def handleNext(self, point, pointPredictions, pointRanges):
+        # print("pointPredictions", pointPredictions)
+        self.counter += 1
+        self.points.append(point)
+        for k in pointPredictions.keys():
+            self.predictionsDict[k].append(pointPredictions[k])
+            self.rangesDict[k].append(pointRanges[k])
+        self.cosmosPlot(point)
+        if self.counter > 0 and (self.counter % 50) == 0:
+            self.plotRange(50, 'temp')
 
 
-    def plotRange(num_points, variable):
-        times = [p[0] for p in points[-num_points:]]
-        reals = [p[0][variable] for p in points[-num_points:]]
+        
+
+
+    def plotRange(self, num_points, variable):
+        times = [p[0] for p in self.points[-num_points:]]
+        reals = [p[1][variable] for p in self.points[-num_points:]]
         preds = self.predictionsDict[variable][-num_points:]
         ranges = self.rangesDict[variable][-num_points:]
-        upper_bounds = [preds[i] + ranges[i] for i in points]
-        lower_bounds = [preds[i] - ranges[i] for i in points]
+        print("times", times)
+        print("preds ", preds)
+        print("ranges", ranges)
+        upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
+        lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
+        print("times", times)
         #TODO plot(times, reals, preds, lower_bounds, upper_bounds)
+
 
     
 

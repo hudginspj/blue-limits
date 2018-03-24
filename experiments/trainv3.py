@@ -8,6 +8,7 @@ import xSimData as simData
 import xRegressor
 import rangeCalc
 import liveMonitor
+import time
 
 
 ####################### Train for predictions ####################
@@ -54,14 +55,15 @@ ranger.train(training_windows, training_outputs)
 print("Running live")
 monitor = liveMonitor.LiveMonitor(1)
 while True:
+    time.sleep(0.1)
     point = simData.nextPoint()
     
     collector.addPoint(point)
     window = collector.nextXWindow()
     if window:
-        predictions = regressor.predict(window)
-        ranges = ranger.calcRanges(window)
-        monitor.handleNext(point, )
+        pointPredictions = col.outputsToDict(regressor.predict(window))
+        pointRanges = col.outputsToDict(ranger.calcRanges(window))
+        monitor.handleNext(point, pointPredictions, pointRanges)
 
 # NUM_test_POINTS = 100
 # testing_points = []  # structures
