@@ -12,22 +12,23 @@ import xRegressor
 
 
 
+
 NUM_TRAINING_POINTS = 100
 training_points = []  # structures
 training_windows = []  # numpy arrays
 training_outputs = []
 
-simData = None  # TODO
-collector = Collector()
+
+collector = collectorv2.Collector()
 for i in range(NUM_TRAINING_POINTS):
-    point = simData.nextPoint()
+    point = xSimData.nextPoint()
     collector.addPoint(point)
     window = collector.nextXWindow()
     if window:
         training_windows.append(window)
-        training_outputs.append(collector.nextYOutputs)
+        training_outputs.append(collector.nextYOutputs())
 
-regressor = xRegressor.Regressor()
+regressor = xRegressor.Regressor(1)
 regressor.train(training_windows, training_outputs)
 
 
@@ -41,7 +42,7 @@ real_values=[]
 predictions = []
 
 
-simData = None  # TODO
+
 collector = collectorv2.Collector()
 for i in range(NUM_test_POINTS):
     point = xSimData.nextPoint()
@@ -52,5 +53,8 @@ for i in range(NUM_test_POINTS):
     if window:
         prediction = regressor.predict(window)[0]
         predictions.append(prediction)
+        print("prediction", prediction)
         # test_windows.append(window)
         # test_outputs.append(collector.nextYOutputs)
+
+# xP_plots.graph(timestamps, real_values, predictions)
