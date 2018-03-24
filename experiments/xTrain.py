@@ -15,8 +15,8 @@ for i in range(NUM_TRAINING_POINTS):
         training_windows.append(window)
         training_outputs.append(collector.nextYOutputs)
     
-    trainer = None #TODO
-    trainer.train(training_windows, training_outputs)
+    regressor = None #TODO
+    regressor.train(training_windows, training_outputs)
 
 
 
