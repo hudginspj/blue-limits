@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import collectorv3 as col
 import xP_plots
 
+PLOT_CONSTANTLY = True
 
 class LiveMonitor(object):
     # The class "constructor" - It's actually an initializer 
@@ -28,11 +29,22 @@ class LiveMonitor(object):
             self.predictionsDict[k].append(pointPredictions[k])
             self.rangesDict[k].append(pointRanges[k])
         self.cosmosPlot(point)
+        if PLOT_CONSTANTLY:
+            if self.counter > 0 and (self.counter % 50) == 0:
+                self.plotRange(50, 'temp')
+        else:
+            anomalyKey = self.detectAnomalyKey()
+            if anomalyKey:
+                self.plotRange(50, anomalyKey)
+
+
+
+    def detectAnomalyKey(self, point, pointPredictions): #returns key of anomaly if exists
         if self.counter > 0 and (self.counter % 50) == 0:
-            self.plotRange(50, 'temp')
+            return 'temp'
+        else
+            return None
 
-
-        
 
 
     def plotRange(self, num_points, variable):
@@ -51,7 +63,6 @@ class LiveMonitor(object):
         #TODO plot(times, reals, preds, lower_bounds, upper_bounds)
 
 
-    
 
     def ranges(self, xWindow):
         ranges = []
