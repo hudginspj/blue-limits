@@ -27,5 +27,6 @@ for i in range(NUM_TRAINING_POINTS):
 plt.plot(graphxs,graphys)
 plt.show()
 
-def graph(timestamps, realValues, predictedValues)
+def graph(timestamps, realValues, predictedValues):
+    pass
 

@@ -16,7 +16,8 @@ class Regressor(object):
     def predict(self, xWindow):
         yOutputs = []
         for i_out in range(self.num_outputs):
-            prediction = self.regressors[i_out].predict(xWindow)
+            prediction = self.regressors[i_out].predict(numpy.array([xWindow])) #TODO terrible code
+            yOutputs.append(prediction)
         return yOutputs
 
     def train(self, xWindows, yOutputs):
