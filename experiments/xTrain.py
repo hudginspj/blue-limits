@@ -1,23 +1,23 @@
-import collector
-import xRegresor
+import collectorv2
+import xRegressor
+import xSimData
 
 NUM_TRAINING_POINTS = 100
 training_points = [] #structures
 training_windows = [] #numpy arrays
 training_outputs = []
 
-simData = None #TODO
-collector = Collector()
+collector = collectorv2.Collector()
 for i in range(NUM_TRAINING_POINTS):
-    point = simData.nextPoint()
+    point = xSimData.nextPoint()
     collector.addPoint(point)
     window = collector.nextXWindow()
     if window:
         training_windows.append(window)
-        training_outputs.append(collector.nextYOutputs)
+        training_outputs.append(collector.nextYOutputs())
     
-    regressor = xRegressor.Regressor()
-    regressor.train(training_windows, training_outputs)
+regressor = xRegressor.Regressor(1)
+regressor.train(training_windows, training_outputs)
 
 
 

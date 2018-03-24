@@ -4,8 +4,6 @@ WINDOW_SIZE = 10
 
 
 class Collector(object):
-
-
     # The class "constructor" - It's actually an initializer 
     def __init__(self):
         self.columns = 5
