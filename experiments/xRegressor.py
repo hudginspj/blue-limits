@@ -39,7 +39,7 @@ class Regressor(object):
             # r = sklearn.neighbors.KNeighborsRegressor()
             # r = sklearn.neural_network
             # r = svm.SVR(gamma=0.0001, C= 100)
-            # r = RandomForestRegressor()
+            r = RandomForestRegressor()
             return r
     except Exception as e:
         pass
