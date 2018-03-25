@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import style
-import xSimData as simData
+import simdata as simData
 import xRegressor
 import rangeCalc
 import liveMonitor
