@@ -65,7 +65,7 @@ try:
         time.sleep(0.1)
         point = simData.nextPoint()
 
-        simAnomaly2.addAnomaly(point)
+        # simAnomaly2.addAnomaly(point)
 
         cosmosServer.nextPoint = point
         collector.addPoint(point)

@@ -71,7 +71,7 @@ def nextAccelWalk():
        upper = 2.0
        lower = -2.0
 
-    maxStep = upper / 4.0
+    maxStep = upper / 15.0
     lastAccel += random.uniform(-maxStep, maxStep)
 
     if lastAccel > upper:
