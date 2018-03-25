@@ -8,6 +8,9 @@ from threading import Thread
 
 nextPoint = None
 
+DISABLE = True
+
+
 def threaded_function():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,10 +37,14 @@ def threaded_function():
             while True:
                 time.sleep(0.5)
                 # point = xSimData.nextPoint()
-                outputArr = col.pointToOutputs(nextPoint)
-                print(outputArr)
-                data = (str(outputArr) + '\n').encode('utf-8')
-                connection.send(data)
+            outputArr = [
+                point[1]['mode'],
+                point[1]['TEMP2'],
+                point[1]['ACCELX']
+            ]
+            print(outputArr)
+            data = (str(outputArr) + '\n').encode('utf-8')
+            connection.send(data)
             # if data:
             #     print('sending data back to the client')
             #     connection.send(data)
@@ -54,6 +61,6 @@ def threaded_function():
             connection.close()
             print("connection closed by server")
 
-
-thread = Thread(target = threaded_function)
-thread.start()
+if not DISABLE:
+    thread = Thread(target = threaded_function)
+    thread.start()
