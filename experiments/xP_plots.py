@@ -15,9 +15,9 @@ try:
     fig4 = fig.add_subplot(2, 1, 2)
     font_dict = {'family': 'serif',
                  'color': 'green',
-                 'size': 8}
+                 'size': 15}
 
-    def graph(timestamps, realValues, predictedValues, b1, b2, anomaly=False, lm1=2.5, lm2=-2.5, redll=-3, redlh=3):
+    def graph(timestamps, realValues, predictedValues, b1, b2, anomaly=False, lm1=2.1, lm2=-2.1, redll=-2.4, redlh=2.4):
         cnter = 1
         lm1s = []
         lm2s = []
@@ -35,12 +35,13 @@ try:
         fig1.plot(timestamps, lm2s, 'yellow')
         fig1.plot(timestamps, lreds, 'red')
         fig1.plot(timestamps, hreds, 'red')
-        fig1.plot(timestamps, realValues, 'orange')
-        fig1.plot(timestamps, b1, 'blue')
-        fig1.plot(timestamps, b2, 'blue')
-        fig1.plot(timestamps, predictedValues, 'xkcd:green')
-
+        fig1.plot(timestamps, realValues, 'orange', label="Reals")
+        fig1.plot(timestamps, b1, 'blue', label="Bound1")
+        fig1.plot(timestamps, b2, 'blue', label="Bound2")
+        fig1.plot(timestamps, predictedValues, 'xkcd:green', label="Preds")
         fig1.set_title('Temp Learn Curve', font_dict)
+        # plt.legend()
+        # fig1.get_legend()
         if anomaly:
             fig1.set_title('Anomaly', font_dict)
             fig1.__annotations__('',(timestamps[len(timestamps)-1],realValues[len(realValues)-1]),
@@ -67,7 +68,8 @@ try:
         fig4.set_title('Modes', font_dict)
         plt.pause(0.01)
 
-
+    # plt.legend()
+    # fig1.get_legend()
     plt.show()
 
 
