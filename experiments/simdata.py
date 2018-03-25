@@ -3,23 +3,44 @@
 # orbit - radians in a circle
 # mode- random int
 import numpy as np 
-import random as rndm 
+import random
 import matplotlib.pyplot as plt
 import pandas as pd
 from math import cos,sin,pi,sqrt
 from scipy.stats import norm
 
+
 counter = 0
+mode = 0
 
 def nextPoint():
     global counter
     counter += 1
     time = float(counter)
-    mode = rndm.randrange(5)
-    angle = 2.0 *  pi * (counter % 100) / 100.0
-    temp = tempf(angle)
-    point = (time, {"mode": mode, "orbitAngle": angle, "temp": temp})
+    mode = nextMode()
+    orbitAngle = 2.0 *  pi * (counter % 100) / 100.0
+    temp = sin(orbitAngle)
+    temp2 = cos(orbitAngle)
+    point = (time, {"mode": mode, 
+        "orbitAngle": orbitAngle, 
+        "temp": temp, 
+        "TEMP2": tempf(orbitAngle),
+        "ACCELX": nextAccel()
+    })
+
     return point
+
+def nextMode():
+    global mode
+    if random.randrange(10) == 0:
+        mode = random.randrange(3)
+    return mode
+
+def nextAccel():
+    if mode == 1:
+        return random.uniform(-2.0, 2.0)
+    else:
+        return random.uniform(-0.1, 0.1)
 
 def tempf(angle):
     return abs(sin(2*angle)) + sin(angle % 100) 

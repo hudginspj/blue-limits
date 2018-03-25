@@ -37,7 +37,7 @@ def threaded_function():
             # while True:
                 # time.sleep(0.1)
                 # point = xSimData.nextPoint()
-            outputArr = return [
+            outputArr = [
                 point[1]['mode'],
                 point[1]['TEMP2'],
                 point[1]['ACCELX']
