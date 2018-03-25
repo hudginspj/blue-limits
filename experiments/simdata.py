@@ -90,10 +90,25 @@ def random_walk():
     global lastAccel
     while (True): 
         if mode == 1:
+            if lastAccel == upperbound  #need to pull bounds from somewhere else
+                return lastAccel += random.uniform(-2.0,0)
+            else if lastAccel == lowerbound    
+                return lastAccel += random.uniform(0,2.0) 
+            else:
+                pass
             return lastAccel += random.uniform(-2.0, 2.0)
         else:
+            if lastAccel == upperbound  #need to pull bounds from somewhere else
+                return lastAccel += random.uniform(-.1,0)
+            else if lastAccel == lowerbound
+                return lastAccel += random.uniform(0,0.1) 
+            else:
+                pass
             return lastAccel += random.uniform(-0.1, 0.1)
-
+#On a graph, should be ordered pair of: (counter, lastAccel)
+#counter needs to be constant
+#lastAccel should increment by some small random value
+#when lastAccel hits a bound, don't let it past
 
 
 
