@@ -8,6 +8,9 @@ from threading import Thread
 
 nextPoint = None
 
+DISABLE = True
+
+
 def threaded_function():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,6 +54,6 @@ def threaded_function():
             # Clean up the connection
             connection.close()
 
-
-thread = Thread(target = threaded_function)
-thread.start()
+if not DISABLE:
+    thread = Thread(target = threaded_function)
+    thread.start()
