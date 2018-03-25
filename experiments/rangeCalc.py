@@ -21,6 +21,23 @@ class Ranger(object):
         return ranges
 
     def train(self, xWindows, yOutputs, predictions):
+        nFlatten = 5
+        xWindowArr = numpy.array(xWindows[nFlatten:])
+        for i_out in range(self.num_outputs):
+            errs = []
+            for i in range(nFlatten, yOutputs.__len__()):
+                dif = 0.0
+                for j in range(nFlatten):
+                    real = yOutputs[i-j][i_out]
+                    pred = predictions[i-j][i_out]
+                    dif += abs(real-pred)
+                dif = dif / float(nFlatten)
+                errs.append(dif)
+            errArr = numpy.array(errs)
+
+            self.regressors[i_out].fit(xWindowArr, errArr)
+
+    def trainUnflat(self, xWindows, yOutputs, predictions):
         xWindowArr = numpy.array(xWindows)
         for i_out in range(self.num_outputs):
             errs = []

@@ -51,7 +51,7 @@ def tempf(angle):
 if __name__ == "__main__":
     print(nextPoint())
 
-lastAccel = 0
+lastAccel = 0.0
 
 def nextAccel():
     global lastAccel
@@ -61,6 +61,23 @@ def nextAccel():
     else:
         return random.uniform(-0.1, 0.1)
 
+def nextAccelWalk():
+    global lastAccel
+    upper = 0.1
+    lower = -0.1
+    if mode == 1:
+       upper = 2.0
+       lower = -2.0
+
+    maxStep = upper / 4.0
+    lastAccel += random.uniform(-maxStep, maxStep)
+
+    if lastAccel > upper:
+        lastAccel = upper
+    if lastAccel < lower:
+        lastAccel = lower
+    
+    return lastAccel
 
 
 
