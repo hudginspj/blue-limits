@@ -17,6 +17,12 @@ def nextPoint():
     global counter
     counter += 1
     time = float(counter)
+<<<<<<< HEAD
+    mode = random.randrange(3)
+    angle = 2.0 *  pi * (counter % 100) / 100.0
+    temp = tempf(angle)
+    point = (time, {"mode": mode, "orbitAngle": angle, "temp": temp})
+=======
     mode = nextMode()
     orbitAngle = 2.0 *  pi * (counter % 100) / 100.0
     temp = sin(orbitAngle)
@@ -28,6 +34,7 @@ def nextPoint():
         "ACCELX": nextAccel()
     })
 
+>>>>>>> 7c384929233e9098424dcd03e89f7373749c9505
     return point
 
 def nextMode():
@@ -43,10 +50,28 @@ def nextAccel():
         return random.uniform(-0.1, 0.1)
 
 def tempf(angle):
-    return abs(sin(2*angle)) + sin(angle % 100) 
+    return abs(sin(2*angle) + sin(angle)) 
+    #return sin(.0625sin(angle)+sin(angle%90))
+    #return TAYLOR SERIES GOES HERE
+    #return sin(2*angle) + sin(angle)
 
 if __name__ == "__main__":
     print(nextPoint())
+
+lastAccel = 0
+
+def nextAccel():
+    global lastAccel
+    
+    if mode == 1:
+        return random.uniform(-2.0, 2.0)
+    else:
+        return random.uniform(-0.1, 0.1)
+
+
+
+
+
 
 
 # def accel_x():
@@ -55,7 +80,7 @@ if __name__ == "__main__":
 
 # def normiedata():
 #     x = np.linspace(0, 1000, 100)
-#     y = (2*x) + 2 + 20*np.random.randn(100)
+#     y = (2*x) + np.random.randn(5)
 #     data = np.hstack((x.reshape(100,1), y.reshape(100,1)))
 #     return
 
