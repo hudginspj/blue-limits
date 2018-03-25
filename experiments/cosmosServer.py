@@ -37,7 +37,11 @@ def threaded_function():
             # while True:
                 # time.sleep(0.1)
                 # point = xSimData.nextPoint()
-            outputArr = col.pointToOutputs(nextPoint)
+            outputArr = return [
+                point[1]['mode'],
+                point[1]['TEMP2'],
+                point[1]['ACCELX']
+            ]
             print(outputArr)
             data = (str(outputArr) + '\n').encode('utf-8')
             connection.send(data)
