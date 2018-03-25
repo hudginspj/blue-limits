@@ -2,7 +2,7 @@
 import sklearn
 from sklearn.ensemble import RandomForestRegressor
 import numpy
-
+import math
 
 
 class Ranger(object):
@@ -10,17 +10,34 @@ class Ranger(object):
     def __init__(self, num_outputs):
         self.num_outputs = num_outputs
         self.regressors = []
+        self.lastRawRanges = []
         for i in range(num_outputs):
             self.regressors.append(RandomForestRegressor())
+            self.lastRawRanges.append([])
+        
+
+    def flatRange(self, rawRange, i_out):
+        self.lastRawRanges[i_out].append(rawRange)
+        if self.lastRawRanges[i_out].__len__() > 10:
+            self.lastRawRanges[i_out].pop(0)
+        return max(self.lastRawRanges[i_out])
 
     def calcRanges(self, xWindow):
+        ranges = []
+        for i_out in range(self.num_outputs):
+            predictedErr = self.regressors[i_out].predict(numpy.array([xWindow]))
+            r = self.flatRange(predictedErr, i_out) * 2.0
+            ranges.append(r)
+        return ranges
+        
+    def calcRangesRaw(self, xWindow):
         ranges = []
         for i_out in range(self.num_outputs):
             predictedErr = self.regressors[i_out].predict(numpy.array([xWindow]))
             ranges.append(predictedErr * 2)
         return ranges
 
-    def train(self, xWindows, yOutputs, predictions):
+    def trainFlat(self, xWindows, yOutputs, predictions):
         nFlatten = 5
         xWindowArr = numpy.array(xWindows[nFlatten:])
         for i_out in range(self.num_outputs):
@@ -37,7 +54,7 @@ class Ranger(object):
 
             self.regressors[i_out].fit(xWindowArr, errArr)
 
-    def trainUnflat(self, xWindows, yOutputs, predictions):
+    def train(self, xWindows, yOutputs, predictions):
         xWindowArr = numpy.array(xWindows)
         for i_out in range(self.num_outputs):
             errs = []

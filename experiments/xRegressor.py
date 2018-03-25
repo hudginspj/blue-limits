@@ -24,6 +24,8 @@ class Regressor(object):
                 yOutputs.append(prediction[0])
             return yOutputs
 
+   
+
         def train(self, xWindows, yOutputs):
             xWindowArr = numpy.array(xWindows)
             for i_out in range(self.num_outputs):

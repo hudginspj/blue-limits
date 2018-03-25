@@ -16,7 +16,7 @@ import cosmosServer
 ####################### Train for predictions ####################
 print("Training for predictions")
 
-NUM_TRAINING_POINTS = 100
+NUM_TRAINING_POINTS = 600
 training_points = []  # structures
 training_windows = []  # numpy arrays
 training_outputs = []
@@ -65,7 +65,7 @@ try:
         time.sleep(0.1)
         point = simData.nextPoint()
 
-        # simAnomaly2.addAnomaly(point)
+        simAnomaly2.addAnomaly(point)
 
         cosmosServer.nextPoint = point
         collector.addPoint(point)
