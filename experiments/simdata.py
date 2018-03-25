@@ -20,7 +20,7 @@ def nextPoint():
     mode = nextMode()
     orbitAngle = 2.0 *  pi * (counter % 100) / 100.0
     temp = sin(orbitAngle)
-    temp2 = random_walk()
+    temp2 = nextAccelWalk()
     point = (time, {"mode": mode, 
         "orbitAngle": orbitAngle, 
         "temp": temp, 
@@ -32,7 +32,9 @@ def nextPoint():
 
 def nextMode():
     global mode
-    if random.randrange(10) == 0:
+    global counter
+    # if random.randrange(10) == 0:
+    if counter % 30 == 0:
         mode = random.randrange(3)
     return mode
 
@@ -65,7 +67,7 @@ def nextAccelWalk():
     global lastAccel
     upper = 0.1
     lower = -0.1
-    if mode == 1:
+    if mode == 2:
        upper = 2.0
        lower = -2.0
 
@@ -85,7 +87,7 @@ def random_walk():
     global lastAccel
     global mode
     
-    if mode == 1:
+    if mode == 2:
         if lastAccel >= 2.0:  #need to pull bounds from somewhere else
             lastAccel += random.uniform(-2.0,0)
         elif lastAccel <= -2.0 :   
