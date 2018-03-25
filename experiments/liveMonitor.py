@@ -60,6 +60,8 @@ class LiveMonitor(object):
     def plotRange(self, num_points, variable, anomaly=False):
         times = [p[0] for p in self.points[-num_points:]]
         reals = [p[1][variable] for p in self.points[-num_points:]]
+        angles = [p[1]['orbitAngle'] for p in self.points[-num_points:]]
+        accelx = [p[1]['ACCELX'] for p in self.points[-num_points:]]
         modes = [p[1]['mode'] for p in self.points[-num_points:]]
         preds = self.predictionsDict[variable][-num_points:]
         ranges = self.rangesDict[variable][-num_points:]
@@ -69,6 +71,8 @@ class LiveMonitor(object):
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
         xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
+        xP_plots.orbitangleplot(times, angles)
+        xP_plots.accelxplot(times, accelx)
         xP_plots.modes(times, modes)
         # print("times", times)
 
