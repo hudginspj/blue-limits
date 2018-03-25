@@ -25,7 +25,7 @@ def nextPoint():
         "orbitAngle": orbitAngle, 
         "temp": temp, 
         "TEMP2": tempf(orbitAngle),
-        "ACCELX": nextAccel()
+        "ACCELX": random_walk()
     })
 
     return point
@@ -36,11 +36,11 @@ def nextMode():
         mode = random.randrange(3)
     return mode
 
-def nextAccel():
-    if mode == 1:
-        return random.uniform(-2.0, 2.0)
-    else:
-        return random.uniform(-0.1, 0.1)
+# def nextAccel():
+#     if mode == 1:
+#         return random.uniform(-2.0, 2.0)
+#     else:
+#         return random.uniform(-0.1, 0.1)
 
 def tempf(angle):
     return abs(sin(2*angle) + sin(angle)) 
@@ -78,6 +78,21 @@ def nextAccelWalk():
         lastAccel = lower
     
     return lastAccel
+    global mode
+    while True:
+        if mode == 1:
+            return random.uniform(-2.0, 2.0)
+        else:
+            return random.uniform(-0.1, 0.1)
+
+#Random walk skeleton
+def random_walk():
+    global lastAccel
+    while (True): 
+        if mode == 1:
+            return lastAccel += random.uniform(-2.0, 2.0)
+        else:
+            return lastAccel += random.uniform(-0.1, 0.1)
 
 
 
