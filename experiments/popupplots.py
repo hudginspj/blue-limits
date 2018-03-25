@@ -6,15 +6,17 @@ import matplotlib.animation as animation
 style.use("dark_background")
 
 try:
-    plt.ion()
-    fig = plt.figure()
-    font_dict = {'family': 'serif',
-                 'color': 'green',
-                 'size': 15}
+
 
     def graph(timestamps, realValues, predictedValues, b1, b2, anomaly=False, lm1=2.1, lm2=-2.1, redll=-2.4, redlh=2.4):
+
         if anomaly:
-            plt.clf()
+            plt.ion()
+            # fig = plt.figure()
+            font_dict = {'family': 'serif',
+                         'color': 'green',
+                         'size': 15}
+
             # cnter = 1
             lm1s = []
             lm2s = []
@@ -41,9 +43,16 @@ try:
                          xytext=(0.8, 0.9), textcoords='axes fraction',
                          arrowprops = dict(color='darkred'))
             plt.pause(0.01)
+
+            plt.clf()
         else:
             plt.clf()
             # cnter = 1
+            plt.ion()
+            # fig = plt.figure()
+            font_dict = {'family': 'serif',
+                         'color': 'green',
+                         'size': 15}
             lm1s = []
             lm2s = []
             lreds = []
@@ -66,6 +75,7 @@ try:
             plt.plot(timestamps, b2, 'blue', label="Bound2")
             plt.title('Temperature', font_dict)
             plt.pause(0.01)
+            plt.clf()
 
             # fig1.get_legend()
         # if anomaly:
