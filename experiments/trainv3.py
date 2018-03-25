@@ -21,6 +21,7 @@ training_points = []  # structures
 training_windows = []  # numpy arrays
 training_outputs = []
 
+
 collector = col.Collector()
 for i in range(NUM_TRAINING_POINTS):
     point = simData.nextPoint()
@@ -29,6 +30,7 @@ for i in range(NUM_TRAINING_POINTS):
     if window:
         training_windows.append(window)
         training_outputs.append(collector.nextYOutputs())
+        
 
 regressor = xRegressor.Regressor(3)
 regressor.train(training_windows, training_outputs)
@@ -39,6 +41,7 @@ print("Training for ranges")
 training_points = []
 training_windows = [] 
 training_outputs = []
+training_predictions = []
 
 for i in range(NUM_TRAINING_POINTS):
     point = simData.nextPoint()
@@ -47,9 +50,10 @@ for i in range(NUM_TRAINING_POINTS):
     if window:
         training_windows.append(window)
         training_outputs.append(collector.nextYOutputs())
+        training_predictions.append(regressor.predict(window))
 
 ranger = rangeCalc.Ranger(3)
-ranger.train(training_windows, training_outputs)
+ranger.train(training_windows, training_outputs, training_predictions)
 
 
 ########### Run live ####################
@@ -60,7 +64,7 @@ try:
     while True:
         time.sleep(0.1)
         point = simData.nextPoint()
-        
+
         simAnomaly2.addAnomaly(point)
 
         cosmosServer.nextPoint = point

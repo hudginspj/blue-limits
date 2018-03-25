@@ -29,9 +29,9 @@ def nextMode():
 
 def nextAccel():
     if mode == 1:
-        return random.uniform(2.0, 2.0)
+        return random.uniform(-2.0, 2.0)
     else:
-        return random.uniform(0.1, 0.1)
+        return random.uniform(-0.1, 0.1)
 
 
 if __name__ == "__main__":
