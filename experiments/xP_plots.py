@@ -9,7 +9,7 @@ try:
     fig = plt.figure()
     clr = fig.add_subplot(1,1,1)
     def graph(timestamps, realValues, predictedValues, b1, b2, anomaly=False):
-        print("Anomaly: ", anomaly)
+        # print("Anomaly: ", anomaly)
         clr.clear()
         plt.plot(timestamps, realValues, 'b')
         plt.plot(timestamps, b1, 'xkcd:red')

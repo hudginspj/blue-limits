@@ -31,25 +31,28 @@ def threaded_function():
             # Receive the data in small chunks and retransmit it
             #while True:
             # data = b'some-pattern'
-            # while True:
-                # time.sleep(0.1)
+            while True:
+                time.sleep(0.5)
                 # point = xSimData.nextPoint()
-            outputArr = col.pointToOutputs(nextPoint)
-            print(outputArr)
-            data = (str(outputArr) + '\n').encode('utf-8')
-            connection.send(data)
+                outputArr = col.pointToOutputs(nextPoint)
+                print(outputArr)
+                data = (str(outputArr) + '\n').encode('utf-8')
+                connection.send(data)
             # if data:
             #     print('sending data back to the client')
             #     connection.send(data)
             # else:
             #     print  ('no more data from', client_address)
             break
+        #except KeyboardInterrupt as e:
+            #raise e
         except Exception as e:
             print(e)
             pass        
         finally:
             # Clean up the connection
             connection.close()
+            print("connection closed by server")
 
 
 thread = Thread(target = threaded_function)
