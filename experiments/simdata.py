@@ -3,7 +3,7 @@
 # orbit - radians in a circle
 # mode- random int
 import numpy as np 
-import random as rndm 
+import random
 import matplotlib.pyplot as plt
 import pandas as pd
 from math import cos,sin,pi,sqrt
@@ -15,17 +15,35 @@ def nextPoint():
     global counter
     counter += 1
     time = float(counter)
-    mode = rndm.randrange(5)
+    mode = random.randrange(3)
     angle = 2.0 *  pi * (counter % 100) / 100.0
     temp = tempf(angle)
     point = (time, {"mode": mode, "orbitAngle": angle, "temp": temp})
     return point
 
 def tempf(angle):
-    return abs(sin(2*angle)) + sin(angle % 100) 
+    return abs(sin(2*angle) + sin(angle)) 
+    #return sin(.0625sin(angle)+sin(angle%90))
+    #return TAYLOR SERIES GOES HERE
+    #return sin(2*angle) + sin(angle)
 
 if __name__ == "__main__":
     print(nextPoint())
+
+lastAccel = 0
+
+def nextAccel():
+    global lastAccel
+    
+    if mode == 1:
+        return random.uniform(-2.0, 2.0)
+    else:
+        return random.uniform(-0.1, 0.1)
+
+
+
+
+
 
 
 # def accel_x():
@@ -34,7 +52,7 @@ if __name__ == "__main__":
 
 # def normiedata():
 #     x = np.linspace(0, 1000, 100)
-#     y = (2*x) + 2 + 20*np.random.randn(100)
+#     y = (2*x) + np.random.randn(5)
 #     data = np.hstack((x.reshape(100,1), y.reshape(100,1)))
 #     return
 

@@ -27,7 +27,11 @@ def nextMode():
         mode = random.randrange(3)
     return mode
 
+lastAccel = 0
+
 def nextAccel():
+    global lastAccel
+    
     if mode == 1:
         return random.uniform(-2.0, 2.0)
     else:
