@@ -45,16 +45,16 @@ try:
         # plt.legend()
         # fig1.get_legend()
         if anomaly:
-            fig1.set_title('Anomaly', font_dict)
-            plt.annotate.('',(timestamps[len(timestamps)-1],realValues[len(realValues)-1]),
+            plt.set_title('Anomaly', font_dict)
+            plt.annotate('',(timestamps[len(timestamps)-1],realValues[len(realValues)-1]),
                  xytext=(0.8, 0.9), textcoords='axes fraction',
                  arrowprops = dict(color='darkred'))
             # plt.draw()
         else:
             pass
         plt.pause(0.01)
-        pic = fig1.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
-        fig.savefig('ax2_figure.png', bbox_inches=pic)
+        # pic = fig1.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+        # fig.savefig('ax2_figure.png', bbox_inches=pic)
         cnter +=1
     def orbitangleplot(timestamp, orbitangle):
         fig2.plot(timestamp, orbitangle)
