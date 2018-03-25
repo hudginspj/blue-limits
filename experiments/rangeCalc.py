@@ -26,7 +26,7 @@ class Ranger(object):
         ranges = []
         for i_out in range(self.num_outputs):
             predictedErr = self.regressors[i_out].predict(numpy.array([xWindow]))
-            r = self.flatRange(predictedErr, i_out) * 10.0
+            r = (self.flatRange(predictedErr, i_out) * 2.0) + 0.1
             ranges.append(r)
         return ranges
         
