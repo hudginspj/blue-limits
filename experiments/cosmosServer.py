@@ -8,7 +8,7 @@ from threading import Thread
 
 nextPoint = None
 
-DISABLE = True
+DISABLE = False
 
 
 def threaded_function():
