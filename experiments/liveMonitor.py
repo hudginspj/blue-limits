@@ -4,9 +4,10 @@ import numpy
 import matplotlib.pyplot as plt
 import collectorv3 as col
 import xP_plots
+import popupplots
 
 
-PLOT_CONSTANTLY = True
+PLOT_CONSTANTLY = False
 
 class LiveMonitor(object):
     # The class "constructor" - It's actually an initializer 
@@ -70,11 +71,15 @@ class LiveMonitor(object):
         # print("reals", reals)
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
-        xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
-        # xP_plots.orbitangleplot(times, angles)
-        # xP_plots.accelxplot(times, accelx)
-        xP_plots.modes(times, modes)
-        # print("times", times)
+        if PLOT_CONSTANTLY:
+            xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
+            # xP_plots.orbitangleplot(times, angles)
+            # xP_plots.accelxplot(times, accelx)
+            xP_plots.modes(times, modes)
+            # print("times", times)
+        else:
+            popupplots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
+            # xP_plots.modes(times, modes)
 
         #TODO plot(times, reals, preds, lower_bounds, upper_bounds)
 
