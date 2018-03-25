@@ -76,7 +76,6 @@ try:
             monitor.handleNext(point, pointPredictions, pointRanges)
 except Exception as e:
     print(e)
-    raise e
 
 
 
