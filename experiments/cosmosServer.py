@@ -12,6 +12,7 @@ DISABLE = True
 
 
 def threaded_function():
+    global nextPoint
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -37,14 +38,14 @@ def threaded_function():
             while True:
                 time.sleep(0.5)
                 # point = xSimData.nextPoint()
-            outputArr = [
-                point[1]['mode'],
-                point[1]['TEMP2'],
-                point[1]['ACCELX']
-            ]
-            print(outputArr)
-            data = (str(outputArr) + '\n').encode('utf-8')
-            connection.send(data)
+                outputArr = [
+                    nextPoint[1]['mode'],
+                    nextPoint[1]['TEMP2'],
+                    nextPoint[1]['ACCELX']
+                ]
+                print(outputArr)
+                data = (str(outputArr) + '\n').encode('utf-8')
+                connection.send(data)
             # if data:
             #     print('sending data back to the client')
             #     connection.send(data)
