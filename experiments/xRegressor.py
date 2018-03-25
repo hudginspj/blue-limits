@@ -1,5 +1,6 @@
 
 import sklearn
+from sklearn.neural_network import MLPRegressor
 
 from sklearn.ensemble import RandomForestRegressor
 from sklearn import svm
@@ -35,9 +36,8 @@ class Regressor(object):
             # assert xWindows[0].__len__() >= 1
 
         def makeRegressor(self):
-
             # r = sklearn.neighbors.KNeighborsRegressor()
-            # r = sklearn.neural_network
+            r = sklearn.neural_network.MLPRegressor()
             # r = svm.SVR(gamma=0.0001, C= 100)
             r = RandomForestRegressor()
             return r

@@ -22,13 +22,13 @@ def nextPoint():
     return point
 
 def tempf(angle):
-    return (sin(angle)/2) + sin(angle)
+    return abs(sin(2*angle)) + sin(angle % 100) 
 
 if __name__ == "__main__":
     print(nextPoint())
 
 
-# def accel_period():
+# def accel_x():
 
 # def other_period():
 
@@ -38,7 +38,13 @@ if __name__ == "__main__":
 #     data = np.hstack((x.reshape(100,1), y.reshape(100,1)))
 #     return
 
-
+# def triangle(counter, amplitude):
+#      counter += 1
+#      for direction in (1, -1):
+#          for i in range():
+#              yield i * (amplitude / section) * direction
+#          for i in range(section):
+#              yield (amplitude - (i * (amplitude / section))) * direction
 
 
 ########################
