@@ -35,11 +35,13 @@ try:
         fig1.plot(timestamps, lm2s, 'yellow')
         fig1.plot(timestamps, lreds, 'red')
         fig1.plot(timestamps, hreds, 'red')
+        fig1.plot(timestamps, predictedValues, 'xkcd:green', label="Preds")
         fig1.plot(timestamps, realValues, 'orange', label="Reals")
         fig1.plot(timestamps, b1, 'blue', label="Bound1")
         fig1.plot(timestamps, b2, 'blue', label="Bound2")
-        fig1.plot(timestamps, predictedValues, 'xkcd:green', label="Preds")
-        fig1.set_title('Acceleration', font_dict)
+
+
+        fig1.set_title('Temperature', font_dict)
         # plt.legend()
         # fig1.get_legend()
         if anomaly:

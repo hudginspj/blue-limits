@@ -34,7 +34,7 @@ class LiveMonitor(object):
         self.cosmosPlot(point)
         if PLOT_CONSTANTLY:
             if self.counter > 0 and (self.counter % 50) == 0:
-                self.plotRange(50, 'ACCELX')
+                self.plotRange(50, 'TEMP2')
         else:
             anomalyKey = self.detectAnomalyKey(point, pointPredictions, pointRanges)
             if anomalyKey:

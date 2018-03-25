@@ -5,10 +5,10 @@ a_counter = 0
 def addAnomaly(point):
     global a_counter
     a_counter += 1
-    mod = a_counter % 180
+    mod = a_counter % 120
     dif = 0
     if (mod > 70 and mod <=80):
-        dif = (mod - 70) * -0.03
+        dif = (mod - 70) * -0.1
     point[1]['TEMP2'] += dif 
 
 def addAnomaly2(point):
