@@ -17,12 +17,6 @@ def nextPoint():
     global counter
     counter += 1
     time = float(counter)
-<<<<<<< HEAD
-    mode = random.randrange(3)
-    angle = 2.0 *  pi * (counter % 100) / 100.0
-    temp = tempf(angle)
-    point = (time, {"mode": mode, "orbitAngle": angle, "temp": temp})
-=======
     mode = nextMode()
     orbitAngle = 2.0 *  pi * (counter % 100) / 100.0
     temp = sin(orbitAngle)
@@ -31,10 +25,9 @@ def nextPoint():
         "orbitAngle": orbitAngle, 
         "temp": temp, 
         "TEMP2": tempf(orbitAngle),
-        "ACCELX": nextAccel()
+        "ACCELX": random_walk()
     })
 
->>>>>>> 7c384929233e9098424dcd03e89f7373749c9505
     return point
 
 def nextMode():
@@ -62,13 +55,22 @@ lastAccel = 0
 
 def nextAccel():
     global lastAccel
-    
-    if mode == 1:
-        return random.uniform(-2.0, 2.0)
-    else:
-        return random.uniform(-0.1, 0.1)
+    global mode
+    while True:
+        if mode == 1:
+            return random.uniform(-2.0, 2.0)
+        else:
+            return random.uniform(-0.1, 0.1)
 
-
+#Random walk skeleton
+def random_walk():
+    global lastAccel
+    step = random.uniform(.2)
+    while = True: 
+        if mode == 1:
+            return lastAccel += random.uniform(-2.0, 2.0)
+        else:
+            return lastAccel += random.uniform(-0.1, 0.1)
 
 
 
