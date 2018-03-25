@@ -20,7 +20,7 @@ def nextPoint():
     mode = nextMode()
     orbitAngle = 2.0 *  pi * (counter % 100) / 100.0
     temp = sin(orbitAngle)
-    temp2 = cos(orbitAngle)
+    temp2 = random_walk()
     point = (time, {"mode": mode, 
         "orbitAngle": orbitAngle, 
         "temp": temp, 
@@ -78,33 +78,30 @@ def nextAccelWalk():
         lastAccel = lower
     
     return lastAccel
-    global mode
-    while True:
-        if mode == 1:
-            return random.uniform(-2.0, 2.0)
-        else:
-            return random.uniform(-0.1, 0.1)
+
 
 #Random walk skeleton
 def random_walk():
     global lastAccel
-    while (True): 
-        if mode == 1:
-            if lastAccel == upperbound  #need to pull bounds from somewhere else
-                return lastAccel += random.uniform(-2.0,0)
-            else if lastAccel == lowerbound    
-                return lastAccel += random.uniform(0,2.0) 
-            else:
-                pass
-            return lastAccel += random.uniform(-2.0, 2.0)
+    global mode
+    
+    if mode == 1:
+        if lastAccel >= 2.0:  #need to pull bounds from somewhere else
+            lastAccel += random.uniform(-2.0,0)
+        elif lastAccel <= -2.0 :   
+            lastAccel += random.uniform(0,2.0) 
         else:
-            if lastAccel == upperbound  #need to pull bounds from somewhere else
-                return lastAccel += random.uniform(-.1,0)
-            else if lastAccel == lowerbound
-                return lastAccel += random.uniform(0,0.1) 
-            else:
-                pass
-            return lastAccel += random.uniform(-0.1, 0.1)
+            pass
+        lastAccel += random.uniform(-2.0, 2.0)
+    else:
+        if lastAccel >= .1:  #need to pull bounds from somewhere else
+            lastAccel += random.uniform(-.1,0)
+        elif lastAccel <= -.1:
+            lastAccel += random.uniform(0,0.1) 
+        else:
+            pass
+        lastAccel += random.uniform(-0.1, 0.1)
+    return lastAccel
 #On a graph, should be ordered pair of: (counter, lastAccel)
 #counter needs to be constant
 #lastAccel should increment by some small random value
