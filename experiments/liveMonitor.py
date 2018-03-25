@@ -52,6 +52,7 @@ class LiveMonitor(object):
             lower = pointPredictions[k] - pointRanges[k]
             if point[1][k] > upper or point[1][k] < lower:
                 if self.counter % 10 == 0:
+                    print("anomaly", lower, point[1][k], upper)
                     return k
         return None
 
