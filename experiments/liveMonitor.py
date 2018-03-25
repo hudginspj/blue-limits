@@ -34,7 +34,7 @@ class LiveMonitor(object):
         self.cosmosPlot(point)
         if PLOT_CONSTANTLY:
             if self.counter > 0 and (self.counter % 50) == 0:
-                self.plotRange(50, 'ACCELX')
+                self.plotRange(50, 'TEMP2')
         else:
             anomalyKey = self.detectAnomalyKey(point, pointPredictions, pointRanges)
             if anomalyKey:
@@ -60,8 +60,8 @@ class LiveMonitor(object):
     def plotRange(self, num_points, variable, anomaly=False):
         times = [p[0] for p in self.points[-num_points:]]
         reals = [p[1][variable] for p in self.points[-num_points:]]
-        angles = [p[1]['orbitAngle'] for p in self.points[-num_points:]]
-        accelx = [p[1]['ACCELX'] for p in self.points[-num_points:]]
+        # angles = [p[1]['orbitAngle'] for p in self.points[-num_points:]]
+        # accelx = [p[1]['ACCELX'] for p in self.points[-num_points:]]
         modes = [p[1]['mode'] for p in self.points[-num_points:]]
         preds = self.predictionsDict[variable][-num_points:]
         ranges = self.rangesDict[variable][-num_points:]
