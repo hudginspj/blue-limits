@@ -39,7 +39,7 @@ try:
         fig1.plot(timestamps, b1, 'blue', label="Bound1")
         fig1.plot(timestamps, b2, 'blue', label="Bound2")
         fig1.plot(timestamps, predictedValues, 'xkcd:green', label="Preds")
-        fig1.set_title('Temp Learn Curve', font_dict)
+        fig1.set_title('Acceleration', font_dict)
         # plt.legend()
         # fig1.get_legend()
         if anomaly:
