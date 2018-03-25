@@ -71,8 +71,8 @@ class LiveMonitor(object):
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
         xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
-        xP_plots.orbitangleplot(times, angles)
-        xP_plots.accelxplot(times, accelx)
+        # xP_plots.orbitangleplot(times, angles)
+        # xP_plots.accelxplot(times, accelx)
         xP_plots.modes(times, modes)
         # print("times", times)
 
