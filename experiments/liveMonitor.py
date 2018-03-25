@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import collectorv3 as col
 import xP_plots
 
+
 PLOT_CONSTANTLY = True
 
 class LiveMonitor(object):
@@ -59,6 +60,7 @@ class LiveMonitor(object):
     def plotRange(self, num_points, variable, anomaly=False):
         times = [p[0] for p in self.points[-num_points:]]
         reals = [p[1][variable] for p in self.points[-num_points:]]
+        modes = [p[1]['mode'] for p in self.points[-num_points:]]
         preds = self.predictionsDict[variable][-num_points:]
         ranges = self.rangesDict[variable][-num_points:]
         # print("times", times)
@@ -67,6 +69,7 @@ class LiveMonitor(object):
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
         xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)
+        xP_plots.modes(times, modes)
         # print("times", times)
 
         #TODO plot(times, reals, preds, lower_bounds, upper_bounds)

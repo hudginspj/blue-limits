@@ -8,10 +8,11 @@ from threading import Thread
 
 nextPoint = None
 
-DISABLE = True
+DISABLE = False
 
 
 def threaded_function():
+    global nextPoint
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -34,29 +35,32 @@ def threaded_function():
             # Receive the data in small chunks and retransmit it
             #while True:
             # data = b'some-pattern'
-            # while True:
-                # time.sleep(0.1)
+            while True:
+                time.sleep(0.5)
                 # point = xSimData.nextPoint()
-            outputArr = [
-                point[1]['mode'],
-                point[1]['TEMP2'],
-                point[1]['ACCELX']
-            ]
-            print(outputArr)
-            data = (str(outputArr) + '\n').encode('utf-8')
-            connection.send(data)
+                outputArr = [
+                    nextPoint[1]['mode'],
+                    nextPoint[1]['TEMP2'],
+                    nextPoint[1]['ACCELX']
+                ]
+                print(outputArr)
+                data = (str(outputArr) + '\n').encode('utf-8')
+                connection.send(data)
             # if data:
             #     print('sending data back to the client')
             #     connection.send(data)
             # else:
             #     print  ('no more data from', client_address)
             break
+        #except KeyboardInterrupt as e:
+            #raise e
         except Exception as e:
             print(e)
             pass        
         finally:
             # Clean up the connection
             connection.close()
+            print("connection closed by server")
 
 if not DISABLE:
     thread = Thread(target = threaded_function)

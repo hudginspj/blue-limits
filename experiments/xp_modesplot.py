@@ -6,14 +6,11 @@ import matplotlib.animation as animation
 style.use("dark_background")
 
 try:
-    plt.ion()
-    fig = plt.figure()
-    clr = fig.add_subplot(1,1,1)
 
-    def mode(timestamps, modes):
+    def modes(timestamps, modes):
         plt.plot(timestamps, modes, 'crimson')
         plt.pause(0.01)
-    plt.show()
+    plt.show('Figure 1')
 
 except Exception as e:
     print(e)
