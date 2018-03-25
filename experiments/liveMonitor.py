@@ -23,6 +23,8 @@ class LiveMonitor(object):
 
     def handleNext(self, point, pointPredictions, pointRanges):
         # print("pointPredictions", pointPredictions)
+        # print(point)
+        # print(pointRanges)
         self.counter += 1
         self.points.append(point)
         for k in pointPredictions.keys():
@@ -31,7 +33,7 @@ class LiveMonitor(object):
         self.cosmosPlot(point)
         if PLOT_CONSTANTLY:
             if self.counter > 0 and (self.counter % 50) == 0:
-                self.plotRange(50, 'temp')
+                self.plotRange(50, 'ACCELX')
         else:
             anomalyKey = self.detectAnomalyKey(point, pointPredictions, pointRanges)
             if anomalyKey:
@@ -59,9 +61,9 @@ class LiveMonitor(object):
         reals = [p[1][variable] for p in self.points[-num_points:]]
         preds = self.predictionsDict[variable][-num_points:]
         ranges = self.rangesDict[variable][-num_points:]
-        print("times", times)
-        print("preds ", preds)
-        print("reals", reals)
+        # print("times", times)
+        # print("preds ", preds)
+        # print("reals", reals)
         upper_bounds = [preds[i] + ranges[i] for i in range(num_points)]
         lower_bounds = [preds[i] - ranges[i] for i in range(num_points)]
         xP_plots.graph(times, reals, preds, upper_bounds, lower_bounds, anomaly)

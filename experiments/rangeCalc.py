@@ -14,20 +14,24 @@ class Ranger(object):
             self.regressors.append(RandomForestRegressor())
 
     def calcRanges(self, xWindow):
-        yOutputs = []
+        ranges = []
         for i_out in range(self.num_outputs):
-            # prediction = self.regressors[i_out].predict(xWindow)
-            yOutputs.append(0.5)
-        return yOutputs
+            predictedErr = self.regressors[i_out].predict(numpy.array([xWindow]))
+            ranges.append(predictedErr * 2)
+        return ranges
 
-    def train(self, xWindows, yOutputs):
+    def train(self, xWindows, yOutputs, predictions):
         xWindowArr = numpy.array(xWindows)
         for i_out in range(self.num_outputs):
-            ys = []
+            errs = []
             for i in range(yOutputs.__len__()):
-                ys.append(yOutputs[i][i_out])
-            yArr = numpy.array(ys)
-            self.regressors[i_out].fit(xWindowArr, yArr)
+                real = yOutputs[i][i_out]
+                pred = predictions[i][i_out]
+                dif = abs(real-pred)
+                errs.append(dif)
+            errArr = numpy.array(errs)
+
+            self.regressors[i_out].fit(xWindowArr, errArr)
         
 
 if __name__ == "__main__":
