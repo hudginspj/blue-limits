@@ -20,27 +20,29 @@ def nextPoint():
     mode = nextMode()
     orbitAngle = 2.0 *  pi * (counter % 100) / 100.0
     temp = sin(orbitAngle)
-    temp2 = cos(orbitAngle)
+    temp2 = nextAccelWalk()
     point = (time, {"mode": mode, 
         "orbitAngle": orbitAngle, 
         "temp": temp, 
         "TEMP2": tempf(orbitAngle),
-        "ACCELX": nextAccel()
+        "ACCELX": random_walk()
     })
 
     return point
 
 def nextMode():
     global mode
-    if random.randrange(10) == 0:
+    global counter
+    # if random.randrange(10) == 0:
+    if counter % 30 == 0:
         mode = random.randrange(3)
     return mode
 
-def nextAccel():
-    if mode == 1:
-        return random.uniform(-2.0, 2.0)
-    else:
-        return random.uniform(-0.1, 0.1)
+# def nextAccel():
+#     if mode == 1:
+#         return random.uniform(-2.0, 2.0)
+#     else:
+#         return random.uniform(-0.1, 0.1)
 
 def tempf(angle):
     return abs(sin(2*angle) + sin(angle)) 
@@ -51,7 +53,7 @@ def tempf(angle):
 if __name__ == "__main__":
     print(nextPoint())
 
-lastAccel = 0
+lastAccel = 0.0
 
 def nextAccel():
     global lastAccel
@@ -61,7 +63,51 @@ def nextAccel():
     else:
         return random.uniform(-0.1, 0.1)
 
+def nextAccelWalk():
+    global lastAccel
+    upper = 0.1
+    lower = -0.1
+    if mode == 2:
+       upper = 2.0
+       lower = -2.0
 
+    maxStep = upper / 4.0
+    lastAccel += random.uniform(-maxStep, maxStep)
+
+    if lastAccel > upper:
+        lastAccel = upper
+    if lastAccel < lower:
+        lastAccel = lower
+    
+    return lastAccel
+
+
+#Random walk skeleton
+def random_walk():
+    global lastAccel
+    global mode
+    
+    if mode == 2:
+        if lastAccel >= 2.0:  #need to pull bounds from somewhere else
+            lastAccel += random.uniform(-2.0,0)
+        elif lastAccel <= -2.0 :   
+            lastAccel += random.uniform(0,2.0) 
+        else:
+            pass
+        lastAccel += random.uniform(-2.0, 2.0)
+    else:
+        if lastAccel >= .1:  #need to pull bounds from somewhere else
+            lastAccel += random.uniform(-.1,0)
+        elif lastAccel <= -.1:
+            lastAccel += random.uniform(0,0.1) 
+        else:
+            pass
+        lastAccel += random.uniform(-0.1, 0.1)
+    return lastAccel
+#On a graph, should be ordered pair of: (counter, lastAccel)
+#counter needs to be constant
+#lastAccel should increment by some small random value
+#when lastAccel hits a bound, don't let it past
 
 
 
